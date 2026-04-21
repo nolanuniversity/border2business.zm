@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wallet | Trust ZedFund</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <style>
+:root {
+  --tzf-bg-dark: #0a1f1c;
+  --tzf-green-main: #0f6f61;
+  --tzf-green-light: #1aa08a;
+  --tzf-accent-gold: #f1e17b;
+  --tzf-text-light: #e6f4f1;
+  --tzf-text-muted: #9bbfba;
+  --tzf-white: #ffffff;
+}
+
+/* PAGE */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: var(--tzf-bg-dark);
+  margin: 0;
+  padding: 0;
+  color: var(--tzf-text-light);
+}
+
+/* CONTAINER */
+.wallet-container {
+  max-width: 520px;
+  margin: auto;
+  padding: 28px 18px 60px;
+}
+
+/* HEADERS */
+h2 {
+  text-align: center;
+  margin-bottom: 6px;
+  color: var(--tzf-white);
+}
+
+.subtext {
+  text-align: center;
+  color: var(--tzf-text-muted);
+  margin-bottom: 24px;
+}
+
+/* CARDS (MATCH SAVINGS CIRCLES) */
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(15,111,97,0.85),
+    rgba(10,31,28,0.9)
+  );
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(26,160,138,0.25);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 16px;
+  color: var(--tzf-white);
+}
+
+/* AMOUNTS */
+.amount {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--tzf-accent-gold);
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(26,160,138,0.4);
+  margin-top: 12px;
+  font-size: 15px;
+  background: rgba(255,255,255,0.95);
+  color: #111;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--tzf-accent-gold);
+  box-shadow: 0 0 0 3px rgba(241,225,123,0.25);
+}
+
+/* BUTTONS */
+button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 14px;
+  font-weight: 600;
+}
+
+/* PRIMARY (SAME AS INDEX) */
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--tzf-green-light),
+    var(--tzf-green-main)
+  );
+  color: var(--tzf-white);
+}
+
+.btn-primary:hover {
+  opacity: 0.92;
+}
+
+/* PROVIDERS */
+.provider-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.provider-buttons button {
+  flex: 1;
+}
+
+/* Airtel / MTN stay brand-correct */
+.btn-airtel {
+  background: #e60000;
+  color: #fff;
+}
+
+.btn-mtn {
+  background: #ffcc00;
+  color: #1f1f1f;
+}
+
+/* UTILITIES */
+.hidden {
+  display: none;
+}
+
+.center {
+  text-align: center;
+}
+
+.list-item {
+  padding: 10px 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.15);
+  font-size: 14px;
+  color: var(--tzf-text-muted);
+}
+.deposit-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  margin-top: 15px;
+  background: linear-gradient(135deg, #1dd88a, #0fb36a);
+  color: #003820;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 14px;
+  font-size: 16px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.deposit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+}
+
+</style>
+</head>
+
+<body>
+
+  <div class="wallet-container">
+
+    <h2>Wallet</h2>
+    <div class="subtext">Make deposits for your needs: Masterclass, One-on-one coaching sessions & expertise mentorship</div>
+
+    <!-- BALANCES -->
+    <div class="card">
+      <h3>Deposit Wallet</h3>
+      <div class="amount" id="depositBalance">ZMK 0.00</div>
+      <small>For investments only</small>
+    </div>
+
+    <div class="card">
+      <h3>Referral Bonuses</h3>
+      <div class="amount" id="referralBalance">ZMK 0.00</div>
+    </div>
+
+    <!-- DEPOSIT FORM -->
+    <div class="card">
+      <h3>Deposit Cash</h3>
+
+      <input type="number" id="depositAmount" placeholder="Enter amount in ZMK"/>
+
+      <button class="btn-primary" id="chooseProviderBtn">
+        Continue
+      </button>
+
+      <!-- PROVIDER SELECTION -->
+      <div id="providerSection" class="hidden center">
+        <p><strong>Select your Mobile Wallet Provider:</strong></p>
+
+        <div class="provider-buttons">
+          <button class="btn-airtel" id="airtelBtn">Airtel Money</button>
+          <button class="btn-mtn" id="mtnBtn">MTN Mobile Money</button>
+        </div>
+      </div>
+
+      <!-- PAYMENT DETAILS -->
+      <div id="paymentDetails" class="hidden">
+        <h4 id="selectedProviderTitle"></h4>
+
+        <p><strong>Send Payment To:</strong></p>
+        <p id="payToNumber"></p>
+
+        <p><strong>Amount:</strong></p>
+        <p id="payAmount"></p>
+
+        <input type="text" id="senderNumber" placeholder="Enter your mobile number"/>
+
+        <input type="text" id="transactionId" placeholder="Enter Transaction ID / Reference"/>
+
+        <button class="btn-primary" id="confirmDepositBtn">
+          Confirm Deposit
+        </button>
+      </div>
+
+    </div>
+
+   <a href="fund-account.html" class="deposit-btn">
+  💰 Deposit Crypto
+</a>
+ <!-- ACTIVE DEPOSITS -->
+    <div class="card">
+      <h3>Active Deposits</h3>
+      <div id="activeDepositsList">
+        <p class="subtext">No active deposits yet</p>
+      </div>
+    </div>
+
+    <!-- TRANSACTION HISTORY -->
+    <div class="card">
+      <h3>Transaction History</h3>
+      <div id="transactionHistoryList">
+        <p class="subtext">No transactions yet</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="wallet.js"></script>
+</body>
+</html>
