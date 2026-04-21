@@ -247,3 +247,35 @@ export {
   sendSignInLinkToEmail,
   verifyBeforeUpdateEmail
 };
+/* ================= INITIALIZE ================= */
+const app = initializeApp(firebaseConfig);
+
+/* ================= SERVICES ================= */
+const auth = getAuth(app);
+const db = getDatabase(app);
+const storage = getStorage(app);
+
+/* ================= EXPORT ================= */
+export {
+  auth,
+  db,
+  storage,
+
+  // optional exports (if used elsewhere)
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+
+  ref,
+  set,
+  update,
+  get,
+  onValue,
+  push,
+  serverTimestamp,
+
+  storageRef,
+  uploadBytesResumable,
+  getDownloadURL
+};
