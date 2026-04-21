@@ -1,17 +1,40 @@
-import { db } from "./firebase.js";
+/* =========================
+   FIREBASE SETUP (INLINE)
+========================= */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 import {
-  ref, set, push, onValue
+  getDatabase,
+  ref,
+  set,
+  push,
+  onValue
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
 
-/* =========================
-   WAIT FOR DOM
-========================= */
-document.addEventListener("DOMContentLoaded", () => {
+// 🔥 YOUR FIREBASE CONFIG (PUT YOUR REAL VALUES HERE)
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  databaseURL: "YOUR_DATABASE_URL",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
 
-  console.log("Wallet Loaded ✅");
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+
+/* =========================
+   START
+========================= */
+document.addEventListener("DOMContentLoaded", function () {
+
+  console.log("Wallet JS Loaded ✅");
 
   /* =========================
-     UNIQUE USER (NO LOGIN)
+     SIMPLE USER ID (NO LOGIN)
   ========================= */
   function getUserId() {
     let uid = localStorage.getItem("tzf_uid");
@@ -27,14 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentUserId = getUserId();
 
   /* =========================
-     ELEMENTS
+     ELEMENTS (SAFE)
   ========================= */
-  const depositBalanceEl = document.getElementById("depositBalance");
-  const referralBalanceEl = document.getElementById("referralBalance");
-  const depositAmountInput = document.getElementById("depositAmount");
   const chooseProviderBtn = document.getElementById("chooseProviderBtn");
-
+  const depositAmountInput = document.getElementById("depositAmount");
   const providerSection = document.getElementById("providerSection");
+
   const airtelBtn = document.getElementById("airtelBtn");
   const mtnBtn = document.getElementById("mtnBtn");
 
@@ -50,87 +71,70 @@ document.addEventListener("DOMContentLoaded", () => {
   const activeDepositsList = document.getElementById("activeDepositsList");
   const transactionHistoryList = document.getElementById("transactionHistoryList");
 
-  let selectedProvider = "";
+  const depositBalanceEl = document.getElementById("depositBalance");
+  const referralBalanceEl = document.getElementById("referralBalance");
+
+  if (!chooseProviderBtn || !providerSection) {
+    alert("JS Error: Button or Provider section not found");
+    return;
+  }
+
   let currentDepositAmount = 0;
-  let depositBalance = 0;
-  let referralBalance = 0;
-
-  /* =========================
-     BALANCES (REAL-TIME)
-  ========================= */
-  function setupRealtimeBalances() {
-    const depositRef = ref(db, `users/${currentUserId}/depositWallet`);
-    const referralRef = ref(db, `users/${currentUserId}/referralWallet`);
-
-    onValue(depositRef, (snap) => {
-      depositBalance = snap.exists() ? Number(snap.val()) : 0;
-      updateBalances();
-    });
-
-    onValue(referralRef, (snap) => {
-      referralBalance = snap.exists() ? Number(snap.val()) : 0;
-      updateBalances();
-    });
-  }
-
-  function updateBalances() {
-    depositBalanceEl.textContent = `ZMK ${depositBalance.toFixed(2)}`;
-    referralBalanceEl.textContent = `ZMK ${referralBalance.toFixed(2)}`;
-  }
+  let selectedProvider = "";
 
   /* =========================
      CONTINUE BUTTON
   ========================= */
-  chooseProviderBtn.addEventListener("click", () => {
+  chooseProviderBtn.onclick = function () {
+
     const amount = parseFloat(depositAmountInput.value);
 
     if (!amount || amount < 10) {
-      alert("Enter a valid deposit amount (minimum ZMK 10)");
+      alert("Enter at least ZMK 10");
       return;
     }
 
     currentDepositAmount = amount;
-
-    providerSection.classList.remove("hidden");
-
+    providerSection.style.display = "block";
     chooseProviderBtn.style.display = "none";
-  });
+  };
 
   /* =========================
      PROVIDER SELECT
   ========================= */
-  airtelBtn.addEventListener("click", () => showPaymentDetails("Airtel Money"));
-  mtnBtn.addEventListener("click", () => showPaymentDetails("MTN Mobile Money"));
+  airtelBtn.onclick = () => showPayment("Airtel Money");
+  mtnBtn.onclick = () => showPayment("MTN Mobile Money");
 
-  function showPaymentDetails(provider) {
+  function showPayment(provider) {
     selectedProvider = provider;
 
     selectedProviderTitle.textContent = provider;
-    payAmount.textContent = `ZMK ${currentDepositAmount.toFixed(2)}`;
+    payAmount.textContent = "ZMK " + currentDepositAmount.toFixed(2);
 
     payToNumber.textContent =
       provider === "Airtel Money"
-        ? "Send to: 0779653509 (Trust ZedFund Admin — Leah Bwalya)"
-        : "Send to: 0768 526 191 (Trust ZedFund Manager — Lewis Mwaba)";
+        ? "Send to: 0779653509 (Leah Bwalya)"
+        : "Send to: 0768526191 (Lewis Mwaba)";
 
-    paymentDetails.classList.remove("hidden");
+    paymentDetails.style.display = "block";
   }
 
   /* =========================
      CONFIRM DEPOSIT
   ========================= */
-  confirmDepositBtn.addEventListener("click", async () => {
+  confirmDepositBtn.onclick = async function () {
+
     const senderNumber = senderNumberInput.value.trim();
     const txId = transactionIdInput.value.trim();
 
     if (!senderNumber || !txId) {
-      alert("Enter your mobile number and transaction ID");
+      alert("Fill all fields");
       return;
     }
 
     const depositId = "d_" + Date.now();
 
-    const depositData = {
+    const data = {
       uid: currentUserId,
       amount: currentDepositAmount,
       provider: selectedProvider,
@@ -141,97 +145,77 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
-      await set(ref(db, `users/${currentUserId}/deposits/${depositId}`), depositData);
-      await set(ref(db, `depositRequests/${depositId}`), depositData);
+      await set(ref(db, `users/${currentUserId}/deposits/${depositId}`), data);
+      await set(ref(db, `depositRequests/${depositId}`), data);
 
       await push(ref(db, `notifications/${currentUserId}`), {
-        message: "💰 Deposit submitted. Awaiting confirmation.",
-        read: false,
-        time: Date.now(),
-        type: "deposit"
+        message: "Deposit submitted",
+        time: Date.now()
       });
 
-      resetDepositFlow();
+      alert("Deposit submitted ✅");
+      resetFlow();
 
-      alert("Deposit submitted successfully. Pending confirmation.");
     } catch (err) {
       console.error(err);
-      alert("Failed to submit deposit.");
+      alert("Error saving deposit");
     }
-  });
+  };
 
-  /* =========================
-     ACTIVE DEPOSITS
-  ========================= */
-  function setupRealtimeDeposits() {
-    const depositsRef = ref(db, `users/${currentUserId}/deposits`);
-
-    onValue(depositsRef, (snap) => {
-      activeDepositsList.innerHTML = "";
-
-      if (!snap.exists()) {
-        activeDepositsList.innerHTML = `<p class="subtext">No active deposits yet</p>`;
-        return;
-      }
-
-      const data = snap.val();
-
-      Object.values(data).forEach(d => {
-        const div = document.createElement("div");
-        div.className = "list-item";
-        div.textContent = `${d.provider} — ZMK ${d.amount.toFixed(2)} — ${d.status}`;
-        activeDepositsList.prepend(div);
-      });
-    });
-  }
-
-  /* =========================
-     TRANSACTIONS
-  ========================= */
-  function setupRealtimeTransactions() {
-    const txRef = ref(db, `users/${currentUserId}/transactions`);
-
-    onValue(txRef, (snap) => {
-      transactionHistoryList.innerHTML = "";
-
-      if (!snap.exists()) {
-        transactionHistoryList.innerHTML = `<p class="subtext">No transactions yet</p>`;
-        return;
-      }
-
-      const data = snap.val();
-
-      Object.values(data).forEach(t => {
-        const div = document.createElement("div");
-        div.className = "list-item";
-        div.textContent = `${t.type}: ZMK ${t.amount.toFixed(2)} via ${t.provider}`;
-        transactionHistoryList.prepend(div);
-      });
-    });
-  }
-
-  /* =========================
-     RESET
-  ========================= */
-  function resetDepositFlow() {
+  function resetFlow() {
     depositAmountInput.value = "";
     senderNumberInput.value = "";
     transactionIdInput.value = "";
 
-    providerSection.classList.add("hidden");
-    paymentDetails.classList.add("hidden");
+    providerSection.style.display = "none";
+    paymentDetails.style.display = "none";
 
     chooseProviderBtn.style.display = "block";
-
-    currentDepositAmount = 0;
-    selectedProvider = "";
   }
 
   /* =========================
-     INIT
+     REAL-TIME DATA
   ========================= */
-  setupRealtimeBalances();
-  setupRealtimeDeposits();
-  setupRealtimeTransactions();
+  onValue(ref(db, `users/${currentUserId}/depositWallet`), snap => {
+    const val = snap.exists() ? snap.val() : 0;
+    depositBalanceEl.textContent = "ZMK " + Number(val).toFixed(2);
+  });
+
+  onValue(ref(db, `users/${currentUserId}/referralWallet`), snap => {
+    const val = snap.exists() ? snap.val() : 0;
+    referralBalanceEl.textContent = "ZMK " + Number(val).toFixed(2);
+  });
+
+  onValue(ref(db, `users/${currentUserId}/deposits`), snap => {
+    activeDepositsList.innerHTML = "";
+
+    if (!snap.exists()) {
+      activeDepositsList.innerHTML = "<p>No deposits</p>";
+      return;
+    }
+
+    Object.values(snap.val()).forEach(d => {
+      const div = document.createElement("div");
+      div.className = "list-item";
+      div.textContent = `${d.provider} - ZMK ${d.amount} - ${d.status}`;
+      activeDepositsList.prepend(div);
+    });
+  });
+
+  onValue(ref(db, `users/${currentUserId}/transactions`), snap => {
+    transactionHistoryList.innerHTML = "";
+
+    if (!snap.exists()) {
+      transactionHistoryList.innerHTML = "<p>No transactions</p>";
+      return;
+    }
+
+    Object.values(snap.val()).forEach(t => {
+      const div = document.createElement("div");
+      div.className = "list-item";
+      div.textContent = `${t.type}: ZMK ${t.amount}`;
+      transactionHistoryList.prepend(div);
+    });
+  });
 
 });
