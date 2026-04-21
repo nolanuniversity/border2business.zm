@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Border2Business Zambia | Import from 1688 & China</title>
-  <!-- Google Fonts + Font Awesome Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+  <title>Border2Business | 1688 Import Coaching</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -16,404 +16,269 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #fffdf7;
-      color: #1e1e2a;
+      background: #f8fafc;
+      color: #0f172a;
       line-height: 1.5;
     }
 
-    /* color palette based on the image: deep green, gold, off-white, dark slate */
-    :root {
-      --primary-green: #1A4D3E;
-      --primary-gold: #D4AF37;
-      --primary-gold-light: #f5e2a6;
-      --dark-charcoal: #1e2a2e;
-      --cream-bg: #fef9e6;
-      --white: #ffffff;
-      --shadow-sm: 0 12px 30px rgba(0,0,0,0.08);
-      --shadow-md: 0 20px 35px rgba(0,0,0,0.12);
-    }
-
     .container {
-      max-width: 1280px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 20px;
     }
 
-    /* header / hero section (green + gold accents) */
+    /* Header / Hero */
     .hero {
-      background: linear-gradient(135deg, #0f3a2c 0%, #1A4D3E 100%);
+      background: #0f172a;
       color: white;
-      padding: 48px 0 70px;
-      border-bottom-left-radius: 42px;
-      border-bottom-right-radius: 42px;
-      position: relative;
-      overflow: hidden;
+      padding: 48px 0 56px;
     }
 
-    .hero::before {
-      content: "🇿🇲";
-      font-size: 240px;
-      opacity: 0.04;
-      position: absolute;
-      bottom: -40px;
-      right: -30px;
-      pointer-events: none;
-    }
-
-    .logo-badge {
+    .logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 32px;
     }
 
     .logo-icon {
-      background: var(--primary-gold);
-      color: #1A4D3E;
-      width: 48px;
-      height: 48px;
-      border-radius: 60px;
+      background: #f59e0b;
+      color: #0f172a;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
       font-weight: 800;
+      font-size: 20px;
     }
 
     .logo-text {
       font-weight: 700;
-      font-size: 1.4rem;
-      letter-spacing: -0.3px;
+      font-size: 1.3rem;
     }
 
     .logo-text span {
-      color: var(--primary-gold);
+      color: #f59e0b;
     }
 
     .hero h1 {
-      font-size: 3.2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .hero .gold-text {
-      color: var(--primary-gold);
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      max-width: 580px;
-      margin-bottom: 32px;
-    }
-
-    .limited-badge {
-      background: rgba(212, 175, 55, 0.15);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 20px;
-      border-radius: 60px;
-      font-weight: 600;
-      margin-bottom: 28px;
-    }
-
-    .btn-gold {
-      background: var(--primary-gold);
-      color: #1A4D3E;
-      font-weight: 800;
-      padding: 14px 32px;
-      border-radius: 60px;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      transition: 0.2s;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-    }
-
-    .btn-gold i {
-      font-size: 1.2rem;
-    }
-
-    .btn-gold:hover {
-      background: #c4a22c;
-      transform: scale(0.97);
-    }
-
-    .btn-outline-light {
-      background: transparent;
-      border: 1.5px solid white;
-      color: white;
-      padding: 12px 28px;
-      border-radius: 60px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-outline-light:hover {
-      background: rgba(255,255,255,0.1);
-    }
-
-    /* features row */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 28px;
-      margin: 60px 0 40px;
-    }
-
-    .feature-card {
-      background: var(--white);
-      border-radius: 28px;
-      padding: 24px 20px;
-      text-align: center;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid #f0e9da;
-      transition: 0.2s;
-    }
-
-    .feature-card i {
-      font-size: 2.4rem;
-      color: var(--primary-gold);
-      background: #fef3db;
-      padding: 12px;
-      border-radius: 60px;
       margin-bottom: 16px;
     }
 
+    .hero p {
+      color: #cbd5e1;
+      font-size: 1rem;
+      max-width: 500px;
+      margin-bottom: 28px;
+    }
+
+    .badge {
+      background: rgba(245, 158, 11, 0.15);
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    /* Features grid */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      margin: 48px 0 40px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 18px 12px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+    }
+
+    .feature-card i {
+      font-size: 1.6rem;
+      color: #f59e0b;
+      margin-bottom: 10px;
+    }
+
     .feature-card h4 {
-      font-size: 1.2rem;
-      font-weight: 800;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    /* Booking card (classic EdTech style) */
+    .booking-card {
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+      margin: 32px 0 48px;
+      overflow: hidden;
+      border: 1px solid #e9edf2;
+    }
+
+    .booking-header {
+      background: #ffffff;
+      padding: 24px 28px 12px 28px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .booking-header h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .booking-header p {
+      color: #475569;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    .booking-body {
+      padding: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #334155;
       margin-bottom: 8px;
     }
 
-    /* offer cards */
-    .section-title {
-      font-size: 2rem;
+    .form-group select,
+    .form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      background: #ffffff;
+      font-family: 'Inter', sans-serif;
+      transition: 0.2s;
+    }
+
+    .form-group select:focus,
+    .form-group input:focus {
+      outline: none;
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+    }
+
+    .price-panel {
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0 24px;
+      border: 1px solid #eef2f6;
+    }
+
+    .price-label {
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .price-amount {
+      font-size: 1.8rem;
       font-weight: 800;
-      margin: 48px 0 12px;
-      letter-spacing: -0.3px;
+      color: #0f172a;
     }
 
-    .section-sub {
-      color: #4a5568;
-      margin-bottom: 40px;
-      font-size: 1.1rem;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 32px;
-      margin: 40px 0;
-    }
-
-    .offer-card {
-      background: white;
-      border-radius: 32px;
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.25s;
-      border: 1px solid #ede6d4;
-    }
-
-    .offer-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .card-header {
-      background: #fef8ea;
-      padding: 24px 24px 16px;
-      border-bottom: 3px solid var(--primary-gold);
-    }
-
-    .card-header h3 {
-      font-size: 1.7rem;
-      font-weight: 800;
-    }
-
-    .price {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--primary-green);
-      margin: 12px 0 4px;
-    }
-
-    .price small {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #5b6e5c;
-    }
-
-    .card-body {
-      padding: 24px;
-    }
-
-    .feature-list {
-      list-style: none;
-      margin-bottom: 32px;
-    }
-
-    .feature-list li {
-      padding: 10px 0;
+    .btn-proceed {
+      background: #0f172a;
+      color: white;
+      width: 100%;
+      padding: 16px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.2s;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
-      border-bottom: 1px solid #f2eadc;
     }
 
-    .feature-list li i {
-      color: var(--primary-gold);
-      width: 22px;
+    .btn-proceed:hover {
+      background: #f59e0b;
+      color: #0f172a;
+    }
+
+    /* Session menu reference */
+    .ref-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 24px;
+      margin: 32px 0;
+      border: 1px solid #eef2f6;
+    }
+
+    .ref-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .session-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .session-col h4 {
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 12px;
       font-size: 1rem;
     }
 
-    .btn-card {
-      background: var(--primary-green);
-      color: white;
-      width: 100%;
+    .session-col p {
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    .guarantee {
+      background: #fef9e6;
+      border-radius: 24px;
+      padding: 28px 24px;
       text-align: center;
-      padding: 14px;
-      border-radius: 60px;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-block;
-      transition: 0.2s;
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn-card i {
-      margin-right: 8px;
-    }
-
-    .btn-card:hover {
-      background: #0e3a2c;
-    }
-
-    .gold-card .card-header {
-      background: #1A4D3E;
-      color: white;
-      border-bottom: 3px solid var(--primary-gold);
-    }
-
-    .gold-card .card-header h3,
-    .gold-card .price {
-      color: white;
-    }
-
-    .gold-card .price small {
-      color: #d4cfb0;
-    }
-
-    .gold-card .btn-card {
-      background: var(--primary-gold);
-      color: #1A4D3E;
-      font-weight: 800;
-    }
-
-    /* whatsapp community highlight */
-    .whatsapp-community {
-      background: #eef3e8;
-      border-radius: 40px;
-      padding: 48px 36px;
-      margin: 60px 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 30px;
-    }
-
-    .community-text h3 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .community-text p {
-      color: #2d3e2f;
-      max-width: 450px;
-    }
-
-    .btn-wa {
-      background: #25D366;
-      color: #1e2a2e;
-      padding: 14px 36px;
-      border-radius: 60px;
-      font-weight: 800;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-
-    .limited-slots {
-      background: #fff2db;
-      border-radius: 28px;
-      padding: 20px 28px;
-      text-align: center;
-      margin: 20px 0 40px;
-      border-left: 6px solid var(--primary-gold);
-      font-weight: 600;
+      margin: 32px 0 48px;
     }
 
     footer {
-      background: #1A4D3E;
-      color: #d4d9bf;
-      padding: 40px 0 32px;
-      border-top-left-radius: 32px;
-      border-top-right-radius: 32px;
-      margin-top: 70px;
-    }
-
-    /* Simple modal for redirection (no payment) */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.75);
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-    }
-
-    .modal-content {
-      background: white;
-      max-width: 480px;
-      width: 90%;
-      border-radius: 40px;
-      padding: 32px 28px;
-      position: relative;
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 32px 0;
       text-align: center;
+      font-size: 0.8rem;
     }
 
-    .close-modal {
-      position: absolute;
-      top: 18px;
-      right: 24px;
-      font-size: 28px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 720px) {
-      .hero h1 { font-size: 2.2rem; }
-      .section-title { font-size: 1.7rem; }
-      .whatsapp-community { flex-direction: column; text-align: center; }
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.8rem; }
+      .booking-header h2 { font-size: 1.3rem; }
+      .price-amount { font-size: 1.5rem; }
+      .booking-body { padding: 20px; }
     }
   </style>
 </head>
@@ -421,196 +286,271 @@
 
 <div class="hero">
   <div class="container">
-    <div class="logo-badge">
+    <div class="logo">
       <div class="logo-icon">B2B</div>
-      <div class="logo-text">Border2Business <span>ZAMBIA</span></div>
+      <div class="logo-text">Border2Business <span>Zambia</span></div>
     </div>
-    <div class="limited-badge">
-      <i class="fas fa-clock"></i> LIMITED SLOTS AVAILABLE
-    </div>
-    <h1>READY TO START <span class="gold-text">IMPORTING?</span></h1>
-    <p>Join our WhatsApp community for K30 and get supplier contacts, 1688 tutorials, Alipay guide, shipping tips, and live Q&A support.</p>
-    <div style="display: flex; flex-wrap: wrap; gap: 16px;">
-      <button id="heroJoinBtn" class="btn-gold"><i class="fab fa-whatsapp"></i> Join WhatsApp →</button>
-      <a href="#programs" class="btn-outline-light"><i class="fas fa-graduation-cap"></i> View coaching</a>
-    </div>
+    <div class="badge">📦 1688 IMPORT COACHING</div>
+    <h1>From 1688 to Zambia<br>Master imports step by step</h1>
+    <p>Live masterclasses · 1:1 coaching · expert mentorship</p>
   </div>
 </div>
 
 <div class="container">
-  <!-- key benefits (like the image icons) -->
-  <div class="feature-grid">
-    <div class="feature-card"><i class="fas fa-boxes"></i><h4>Supplier Contacts</h4><p>Kitchenware, electronics, furniture & general goods</p></div>
-    <div class="feature-card"><i class="fab fa-alipay"></i><h4>Alipay Guide</h4><p>Step-by-step registration & top-up</p></div>
-    <div class="feature-card"><i class="fas fa-ship"></i><h4>Shipping & Clearance</h4><p>Sea/air freight, customs tips for Zambia</p></div>
-    <div class="feature-card"><i class="fas fa-chalkboard-user"></i><h4>1688 Tutorials</h4><p>Find products & verify suppliers</p></div>
+  <!-- Feature highlights -->
+  <div class="features">
+    <div class="feature-card"><i class="fas fa-magnifying-glass"></i><h4>Find products</h4></div>
+    <div class="feature-card"><i class="fas fa-shield-haltered"></i><h4>Verify suppliers</h4></div>
+    <div class="feature-card"><i class="fas fa-calculator"></i><h4>Landed cost</h4></div>
+    <div class="feature-card"><i class="fas fa-ship"></i><h4>Shipping to Zambia</h4></div>
   </div>
 
-  <!-- limited slots banner -->
-  <div class="limited-slots">
-    <i class="fas fa-user-check" style="color:#D4AF37; margin-right: 10px;"></i> Only 20 slots this month — first come, first served. K30 gives lifetime access to the community & resources.
-  </div>
-
-  <!-- PROGRAMS SECTION (Masterclass + 1:1 + Mentorship) -->
-  <div id="programs">
-    <h2 class="section-title">📦 Level up with coaching & mentorship</h2>
-    <p class="section-sub">From beginners to bulk importers — get hands-on guidance.</p>
-  </div>
-
-  <div class="pricing-grid">
-    <!-- Friday Masterclass -->
-    <div class="offer-card">
-      <div class="card-header">
-        <h3>Friday Masterclass</h3>
-        <div class="price">K20 <small>/ session</small></div>
+  <!-- MAIN BOOKING SECTION (dropdown + redirect to deposit.html) -->
+  <div class="booking-card">
+    <div class="booking-header">
+      <h2>📌 Choose your program</h2>
+      <p>Select a Masterclass week, One‑on‑One session or Mentorship plan</p>
+    </div>
+    <div class="booking-body">
+      <!-- Program type dropdown -->
+      <div class="form-group">
+        <label>📚 Program type</label>
+        <select id="programType">
+          <option value="">-- Select --</option>
+          <option value="masterclass">🎓 Friday Masterclass (K20 / session)</option>
+          <option value="coaching">🎯 One‑on‑One Coaching (K30 – K100)</option>
+          <option value="mentorship">👑 Expert Mentorship (K500 / month)</option>
+        </select>
       </div>
-      <div class="card-body">
-        <ul class="feature-list">
-          <li><i class="fas fa-check-circle"></i> 90-min live group training (WhatsApp)</li>
-          <li><i class="fas fa-check-circle"></i> Account setup, product search, supplier verification</li>
-          <li><i class="fas fa-check-circle"></i> Live Q&A + replay voice notes</li>
-          <li><i class="fas fa-check-circle"></i> Weekly assignments & community feedback</li>
-        </ul>
-        <button class="btn-card masterclassBtn"><i class="fab fa-whatsapp"></i> Book Masterclass →</button>
+
+      <!-- Dynamic: Masterclass weeks -->
+      <div class="form-group" id="masterclassGroup" style="display:none;">
+        <label>📅 Masterclass week</label>
+        <select id="masterclassWeek">
+          <option value="Week 1: Account & Product Search">Week 1 – Account setup + find products (K20)</option>
+          <option value="Week 2: Supplier Verification">Week 2 – Verify suppliers, red flags, video calls (K20)</option>
+          <option value="Week 3: Landed Cost">Week 3 – Landed cost to Zambia + customs (K20)</option>
+          <option value="Week 4: Samples & Shipping">Week 4 – Sample orders + shipping coordination (K20)</option>
+        </select>
+      </div>
+
+      <!-- Dynamic: One‑on‑One sessions (full menu) -->
+      <div class="form-group" id="coachingGroup" style="display:none;">
+        <label>🎯 One‑on‑One session</label>
+        <select id="coachingSession">
+          <option value="B0: Account Registration|30">B0: Account registration (K30)</option>
+          <option value="B1: Find Products on 1688|30">B1: Find products – image + pinyin (K30)</option>
+          <option value="B2: Verify Suppliers|30">B2: 5 checks, red flags, video calls (K30)</option>
+          <option value="B3: Landed Cost|30">B3: Full landed cost calculation (K30)</option>
+          <option value="B4: First Sample Order|30">B4: Order your first sample (K30)</option>
+          <option value="B5: Shipping Options|30">B5: Sea vs air to Zambia (K30)</option>
+          <option value="I1: Profit Deep Dive|60">I1: Profit margin analysis (K60)</option>
+          <option value="I2: 1688 Sourcing|60">I2: Find cheaper suppliers on 1688 (K60)</option>
+          <option value="I3: Negotiation|60">I3: Negotiation scripts (K60)</option>
+          <option value="I4: Freight & Customs|60">I4: Freight forwarders, customs clearance (K60)</option>
+          <option value="I5: Consolidation|60">I5: Order consolidation (K60)</option>
+          <option value="A1: Container Shipping|100">A1: Container shipping strategy (K100)</option>
+          <option value="A2: Private Label|100">A2: Private labeling (K100)</option>
+          <option value="A3: Supplier Relations|100">A3: Supplier relationship management (K100)</option>
+          <option value="A4: Quality Control|100">A4: Quality control inspections (K100)</option>
+          <option value="A5: Factory Sourcing|100">A5: Advanced factory sourcing (K100)</option>
+        </select>
+      </div>
+
+      <!-- Mentorship info (no dropdown, fixed) -->
+      <div class="form-group" id="mentorshipGroup" style="display:none;">
+        <label>👑 Monthly mentorship (K500)</label>
+        <div style="background:#F8FAFE; border-radius: 18px; padding: 14px 16px; margin-top: 4px;">
+          <p>✅ 4 one‑on‑one sessions (any level)</p>
+          <p>✅ 4 Friday Masterclasses included</p>
+          <p>✅ WhatsApp support · Priority booking</p>
+        </div>
+      </div>
+
+      <!-- Customer details -->
+      <div class="form-group">
+        <label>👤 Full name</label>
+        <input type="text" id="customerName" placeholder="e.g., Mary Phiri" required>
+      </div>
+      <div class="form-group">
+        <label>📱 WhatsApp number</label>
+        <input type="tel" id="customerPhone" placeholder="+260 97XXXXXXX" required>
+      </div>
+
+      <!-- Price display -->
+      <div class="price-panel">
+        <span class="price-label">Total amount</span>
+        <span class="price-amount" id="totalAmount">K0</span>
+      </div>
+
+      <button class="btn-proceed" id="bookNowBtn">
+        <i class="fas fa-arrow-right"></i> Continue to payment →
+      </button>
+      <p style="font-size: 0.75rem; text-align: center; margin-top: 14px; color: #5b6e8c;">You'll be redirected to deposit.html to complete your booking securely.</p>
+    </div>
+  </div>
+
+  <!-- Reference: session menu (information only) -->
+  <div class="ref-card">
+    <h3>📋 One‑on‑one session menu (reference)</h3>
+    <div class="session-grid">
+      <div class="session-col">
+        <h4>Beginner · K30</h4>
+        <p>B0: Account setup</p>
+        <p>B1: Find products</p>
+        <p>B2: Verify suppliers</p>
+        <p>B3: Landed cost</p>
+        <p>B4: First sample</p>
+        <p>B5: Shipping options</p>
+      </div>
+      <div class="session-col">
+        <h4>Intermediate · K60</h4>
+        <p>I1: Profit deep dive</p>
+        <p>I2: 1688 sourcing</p>
+        <p>I3: Negotiation</p>
+        <p>I4: Freight & customs</p>
+        <p>I5: Consolidation</p>
+      </div>
+      <div class="session-col">
+        <h4>Advanced · K100</h4>
+        <p>A1: Container shipping</p>
+        <p>A2: Private label</p>
+        <p>A3: Supplier relations</p>
+        <p>A4: Quality control</p>
+        <p>A5: Factory sourcing</p>
       </div>
     </div>
-
-    <!-- One-on-One Coaching -->
-    <div class="offer-card">
-      <div class="card-header">
-        <h3>One‑on‑One Coaching</h3>
-        <div class="price">K30 – K100 <small>/ session</small></div>
-      </div>
-      <div class="card-body">
-        <ul class="feature-list">
-          <li><i class="fas fa-check-circle"></i> Beginner (K30): B0–B5 (account, search, verify)</li>
-          <li><i class="fas fa-check-circle"></i> Intermediate (K60): profit deep-dive, 1688 sourcing</li>
-          <li><i class="fas fa-check-circle"></i> Advanced (K100): containers, private label, QC</li>
-          <li><i class="fas fa-check-circle"></i> You share screen, I guide every click</li>
-        </ul>
-        <button class="btn-card coachingBtn"><i class="fas fa-video"></i> Book 1:1 session →</button>
-      </div>
-    </div>
-
-    <!-- Expert Mentorship (gold card) -->
-    <div class="offer-card gold-card">
-      <div class="card-header">
-        <h3>👑 Expert Mentorship</h3>
-        <div class="price">K500 <small>/ month</small></div>
-      </div>
-      <div class="card-body">
-        <ul class="feature-list">
-          <li><i class="fas fa-crown"></i> 4 one‑on‑one sessions (any level)</li>
-          <li><i class="fas fa-crown"></i> 4 Friday Masterclasses included</li>
-          <li><i class="fas fa-crown"></i> Direct WhatsApp support (reply <12h)</li>
-          <li><i class="fas fa-crown"></i> Priority booking + personal action plan</li>
-          <li><i class="fas fa-crown"></i> Save K120+ vs à la carte</li>
-        </ul>
-        <button class="btn-card mentorshipBtn"><i class="fas fa-rocket"></i> Apply for Mentorship →</button>
-      </div>
-    </div>
   </div>
 
-  <!-- What you get inside community (similar to image) -->
-  <div style="background: #fef9e6; border-radius: 36px; padding: 36px 28px; margin: 40px 0;">
-    <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: center; justify-content: space-between;">
-      <div>
-        <h3 style="font-size: 1.7rem; font-weight: 800;"><i class="fab fa-whatsapp" style="color:#25D366;"></i> WhatsApp Community – K30</h3>
-        <ul style="margin-top: 20px; list-style: none;">
-          <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color:#D4AF37;"></i> ✔ Verified supplier contacts (kitchenware, electronics, furniture, general goods)</li>
-          <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color:#D4AF37;"></i> ✔ Step-by-step 1688.com tutorials (image search, pinyin, verification)</li>
-          <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color:#D4AF37;"></i> ✔ Alipay registration & top-up guide</li>
-          <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color:#D4AF37;"></i> ✔ Shipping & clearance tips (Zambia customs, freight forwarders)</li>
-          <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color:#D4AF37;"></i> ✔ Q&A support from experienced importers</li>
-        </ul>
-      </div>
-      <div>
-        <button id="communityBtn" class="btn-gold" style="background:#1A4D3E; color:white; border:1px solid #D4AF37;"><i class="fab fa-whatsapp"></i> Join community K30 →</button>
-        <p style="margin-top: 12px; font-size: 0.8rem;">Limited slots – one-time fee</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Guarantee + CTA (No payment fields, just redirect) -->
-  <div style="background: #1A4D3E; border-radius: 32px; padding: 44px 36px; text-align: center; color: white; margin: 40px 0;">
-    <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: #D4AF37; margin-bottom: 12px; display: inline-block;"></i>
-    <h3 style="font-size: 1.8rem; font-weight: 800;">100% Risk-Free Coaching</h3>
-    <p style="max-width: 550px; margin: 16px auto;">If you don't learn something useful in your first 1:1 session, you get a full refund. No questions.</p>
-    <button id="footerCtaBtn" class="btn-gold" style="background:#D4AF37; color:#1A4D3E; margin-top: 12px;"><i class="fab fa-whatsapp"></i> Click here to get started →</button>
+  <!-- Guarantee / trust -->
+  <div class="guarantee">
+    <i class="fas fa-shield-alt" style="color: #f59e0b; font-size: 1.8rem; margin-bottom: 8px; display: inline-block;"></i>
+    <h3 style="font-weight: 800; margin-bottom: 6px;">100% risk‑free coaching</h3>
+    <p style="color: #334155;">If you don't learn something valuable in your first session, we'll refund you. No questions.</p>
   </div>
 </div>
 
 <footer>
   <div class="container">
-    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
-      <div>
-        <div class="logo-text" style="color: #D4AF37;">Border2Business Zambia</div>
-        <p style="margin-top: 12px;">Import coaching & sourcing since 2022<br>Based in Zambia — serving Ndola, Lusaka, Kitwe</p>
-      </div>
-      <div>
-        <p><i class="fab fa-whatsapp"></i> +260 97XXXXXXX</p>
-        <p><i class="fas fa-envelope"></i> import@border2business.co.zm</p>
-        <p><i class="fas fa-clock"></i> Mon–Sat 8am–5pm</p>
-      </div>
-    </div>
-    <hr style="margin: 28px 0 20px; border-color: #3a6b5a;">
-    <p style="text-align: center;">© 2026 Border2Business Zambia — Your trusted partner for 1688 imports & supplier sourcing</p>
+    <p>© 2026 Border2Business Zambia — Import coaching for real entrepreneurs</p>
+    <p style="margin-top: 6px;">📍 Based in Zambia · WhatsApp +260 97XXXXXXX</p>
   </div>
 </footer>
 
-<!-- Simple modal that redirects to external payment/booking page (you connect your own link) -->
-<div id="globalModal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" id="closeGlobalModal">&times;</span>
-    <i class="fab fa-whatsapp" style="font-size: 3rem; color:#25D366;"></i>
-    <h3 style="margin: 12px 0 8px;">📲 Complete your registration</h3>
-    <p style="margin-bottom: 16px;">You'll be redirected to complete your booking and payment on our secure page.</p>
-    <a href="#" id="modalRedirectLink" class="btn-card" style="background:#1A4D3E; display:inline-block; width:auto; padding: 12px 28px; text-decoration: none;">Continue to booking →</a>
-    <p style="margin-top: 20px; font-size: 0.8rem;">You will pay on the next page (K30 for community, K20+ for coaching).</p>
-  </div>
-</div>
-
 <script>
-  // ============================================================
-  // IMPORTANT: Replace these links with YOUR actual payment/booking page URLs
-  // ============================================================
-  const COMMUNITY_BOOKING_URL = "https://yourpayment.com/community-k30";      // <--- YOUR LINK FOR K30 COMMUNITY
-  const MASTERCLASS_BOOKING_URL = "https://yourpayment.com/masterclass-k20";   // <--- YOUR LINK FOR MASTERCLASS
-  const COACHING_BOOKING_URL = "https://yourpayment.com/coaching";             // <--- YOUR LINK FOR 1:1 COACHING
-  const MENTORSHIP_BOOKING_URL = "https://yourpayment.com/mentorship-k500";    // <--- YOUR LINK FOR MENTORSHIP
+  // DOM elements
+  const programSelect = document.getElementById('programType');
+  const masterclassGroup = document.getElementById('masterclassGroup');
+  const coachingGroup = document.getElementById('coachingGroup');
+  const mentorshipGroup = document.getElementById('mentorshipGroup');
+  const masterclassWeekSelect = document.getElementById('masterclassWeek');
+  const coachingSessionSelect = document.getElementById('coachingSession');
+  const totalSpan = document.getElementById('totalAmount');
+  const bookBtn = document.getElementById('bookNowBtn');
+  const customerNameInput = document.getElementById('customerName');
+  const customerPhoneInput = document.getElementById('customerPhone');
 
-  // Modal handling
-  const modal = document.getElementById('globalModal');
-  const redirectLink = document.getElementById('modalRedirectLink');
-  let currentRedirectUrl = COMMUNITY_BOOKING_URL;
-
-  function openModalWithUrl(url) {
-    currentRedirectUrl = url;
-    redirectLink.href = url;
-    modal.style.display = 'flex';
+  function updateUiAndPrice() {
+    const program = programSelect.value;
+    masterclassGroup.style.display = 'none';
+    coachingGroup.style.display = 'none';
+    mentorshipGroup.style.display = 'none';
+    
+    let amount = 0;
+    let itemDescription = '';
+    
+    if (program === 'masterclass') {
+      masterclassGroup.style.display = 'block';
+      amount = 20;
+      const selectedOption = masterclassWeekSelect.options[masterclassWeekSelect.selectedIndex];
+      itemDescription = selectedOption ? selectedOption.text : 'Masterclass';
+    } 
+    else if (program === 'coaching') {
+      coachingGroup.style.display = 'block';
+      const selected = coachingSessionSelect.options[coachingSessionSelect.selectedIndex];
+      if (selected) {
+        const parts = selected.value.split('|');
+        amount = parseInt(parts[1]) || 0;
+        itemDescription = selected.text;
+      }
+    } 
+    else if (program === 'mentorship') {
+      mentorshipGroup.style.display = 'block';
+      amount = 500;
+      itemDescription = 'Expert Mentorship (1 month)';
+    }
+    
+    totalSpan.innerText = amount > 0 ? `K${amount}` : 'K0';
+    window.selectedAmount = amount;
+    window.selectedItemName = itemDescription;
+    window.selectedProgram = program;
   }
-
-  // Attach all buttons to redirect to respective external payment/booking pages
-  document.getElementById('heroJoinBtn')?.addEventListener('click', () => openModalWithUrl(COMMUNITY_BOOKING_URL));
-  document.getElementById('communityBtn')?.addEventListener('click', () => openModalWithUrl(COMMUNITY_BOOKING_URL));
-  document.getElementById('footerCtaBtn')?.addEventListener('click', () => openModalWithUrl(COMMUNITY_BOOKING_URL));
   
-  document.querySelectorAll('.masterclassBtn').forEach(btn => btn.addEventListener('click', () => openModalWithUrl(MASTERCLASS_BOOKING_URL)));
-  document.querySelectorAll('.coachingBtn').forEach(btn => btn.addEventListener('click', () => openModalWithUrl(COACHING_BOOKING_URL)));
-  document.querySelectorAll('.mentorshipBtn').forEach(btn => btn.addEventListener('click', () => openModalWithUrl(MENTORSHIP_BOOKING_URL)));
-
-  // Close modal
-  document.getElementById('closeGlobalModal')?.addEventListener('click', () => modal.style.display = 'none');
-  window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
-
-  console.log("✅ Replace COMMUNITY_BOOKING_URL, MASTERCLASS_BOOKING_URL, COACHING_BOOKING_URL, MENTORSHIP_BOOKING_URL with your actual payment/registration links.");
+  programSelect.addEventListener('change', updateUiAndPrice);
+  masterclassWeekSelect.addEventListener('change', updateUiAndPrice);
+  coachingSessionSelect.addEventListener('change', updateUiAndPrice);
+  updateUiAndPrice();
+  
+  // Redirect to deposit.html with all booking details
+  bookBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    const program = programSelect.value;
+    if (!program) {
+      alert('Please select a program type (Masterclass, Coaching or Mentorship).');
+      return;
+    }
+    
+    const customerName = customerNameInput.value.trim();
+    const customerPhone = customerPhoneInput.value.trim();
+    
+    if (!customerName) {
+      alert('Please enter your full name.');
+      return;
+    }
+    if (!customerPhone) {
+      alert('Please enter your WhatsApp number.');
+      return;
+    }
+    
+    let itemName = '';
+    let amount = 0;
+    
+    if (program === 'masterclass') {
+      const weekOption = masterclassWeekSelect.options[masterclassWeekSelect.selectedIndex];
+      itemName = `Friday Masterclass: ${weekOption ? weekOption.text : 'Week session'}`;
+      amount = 20;
+    } 
+    else if (program === 'coaching') {
+      const selected = coachingSessionSelect.options[coachingSessionSelect.selectedIndex];
+      if (selected) {
+        itemName = selected.text;
+        const parts = selected.value.split('|');
+        amount = parseInt(parts[1]) || 0;
+      }
+    } 
+    else if (program === 'mentorship') {
+      itemName = 'Expert Mentorship Program (Monthly)';
+      amount = 500;
+    }
+    
+    // Build query params for deposit.html
+    const params = new URLSearchParams();
+    params.append('item', itemName);
+    params.append('amount', amount);
+    params.append('name', customerName);
+    params.append('phone', customerPhone);
+    params.append('program_type', program);
+    
+    if (program === 'masterclass') {
+      params.append('week_detail', masterclassWeekSelect.value);
+    } else if (program === 'coaching') {
+      const sessionCode = coachingSessionSelect.value.split('|')[0];
+      params.append('session_code', sessionCode);
+    }
+    
+    window.location.href = `deposit.html?${params.toString()}`;
+  });
 </script>
-
-<!-- 
-  INSTRUCTIONS:
-  1. Replace the four URL variables (COMMUNITY_BOOKING_URL, etc.) with your actual payment or booking page links.
-  2. Remove or update the phone number/email in the footer with your real contact info.
-  3. The page now has NO payment forms — all buttons redirect to your external pages.
--->
 </body>
-          </html>
+</html>
