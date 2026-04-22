@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     if (payToNumber) {
       payToNumber.textContent = provider === "Airtel Money"
-        ? "Send to: 0779653509 (Leah Bwalya)"
+        ? "Send to: 097 5914001 (Lewis Mwaba)"
         : "Send to: 0768526191 (Lewis Mwaba)";
     }
 
