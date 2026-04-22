@@ -164,85 +164,78 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // CONFIRM DEPOSIT BUTTON
-  if (confirmDepositBtn) {
-    confirmDepositBtn.addEventListener("click", function (e) {
-      e.preventDefault();
+if (confirmDepositBtn) {
+  confirmDepositBtn.addEventListener("click", async function (e) {
+    e.preventDefault();
 
-      const senderNumber = senderNumberInput?.value.trim() || "";
-      const txId = transactionIdInput?.value.trim() || "";
+    const senderNumber = senderNumberInput?.value.trim() || "";
+    const txId = transactionIdInput?.value.trim() || "";
 
-      if (!senderNumber || !txId) {
-        alert("Fill all fields");
-        return;
-      }
+    if (!senderNumber || !txId) {
+      alert("Fill all fields");
+      return;
+    }
 
-      const deposit = {
-        uid: currentUserId,
-        amount: currentDepositAmount,
-        provider: selectedProvider,
-        senderNumber,
-        transactionId: txId,
-        status: "pending",
-        timestamp: new Date().toISOString()
-      };
+    if (!currentDepositAmount || currentDepositAmount <= 0) {
+      alert("Enter deposit amount first");
+      return;
+    }
 
-      // Save to localStorage
-      const deposits = JSON.parse(localStorage.getItem("deposits") || "[]");
-      deposits.push(deposit);
-      localStorage.setItem("deposits", JSON.stringify(deposits));
+    if (!selectedProvider) {
+      alert("Select provider first");
+      return;
+    }
 
-      // Update UI
-      loadDeposits();
-      
-      alert("✅ Deposit submitted!\nAdmin will verify your payment.");
-      resetFlow();
-    });
-  }
+    const depositId = "d_" + Date.now();
 
-  /* =========================
-     INITIALIZE
-  ========================= */
-  loadBalances();
-  loadDeposits();
+    const data = {
+      uid: currentUserId,
+      amount: currentDepositAmount,
+      provider: selectedProvider,
+      senderNumber,
+      transactionId: txId,
+      status: "pending",
+      timestamp: Date.now()
+    };
 
-  console.log("✅ All event listeners attached");
-});
-const sendWhatsAppBtn = document.getElementById("sendWhatsAppBtn");
+    try {
+      // ✅ SAVE TO FIREBASE
+      await set(ref(db, `users/${currentUserId}/deposits/${depositId}`), data);
+      await set(ref(db, `depositRequests/${depositId}`), data);
 
-sendWhatsAppBtn.onclick = function () {
+      await push(ref(db, `notifications/${currentUserId}`), {
+        message: "Deposit submitted",
+        time: Date.now()
+      });
 
-  const senderNumber = senderNumberInput.value.trim();
-  const txId = transactionIdInput.value.trim();
+      // ✅ WHATSAPP MESSAGE
+      const message =
+`Thank you for making your payment 🙏
 
-  if (!currentDepositAmount || currentDepositAmount <= 0) {
-    alert("Enter deposit amount first");
-    return;
-  }
-
-  if (!selectedProvider) {
-    alert("Select payment provider first");
-    return;
-  }
-
-  if (!txId) {
-    alert("Enter Transaction ID first");
-    return;
-  }
-
-  const message =
-`🧾 DEPOSIT PROOF SUBMISSION
-
+🆔 Deposit ID: ${depositId}
 💰 Amount: ZMK ${currentDepositAmount}
 🏦 Provider: ${selectedProvider}
-📱 Sender Number: ${senderNumber || "Not provided"}
+📱 Sender: ${senderNumber}
 🔖 Transaction ID: ${txId}
 
-⚠️ Please verify my deposit. I have attached proof of payment.`;
+Please send us your proof of payment (screenshot or receipt) here.`;
 
-  const yourWhatsAppNumber = "260771196634"; // 🔴 replace with your number
+      const yourWhatsAppNumber = "260771196634"; // 🔴 PUT YOUR NUMBER
 
-  const url = `https://wa.me/${yourWhatsAppNumber}?text=${encodeURIComponent(message)}`;
+      const url = `https://wa.me/${yourWhatsAppNumber}?text=${encodeURIComponent(message)}`;
 
-  window.open(url, "_blank");
-};
+      // ✅ OPEN WHATSAPP
+      window.open(url, "_blank");
 
+      alert("Deposit saved. Continue on WhatsApp ✅");
+
+      resetFlow();
+
+    } catch (err) {
+      console.error(err);
+      alert("Error saving deposit");
+    }
+  });
+                }
+   
+   
