@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Border2Business Academy | China Sourcing School</title>
-  <!-- Google Fonts + Font Awesome -->
+  <title>Border2Business Academy | China Sourcing Platform School</title>
+  <!-- Google Fonts + Font Awesome + Flatpickr (Calendar) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <style>
     * {
       margin: 0;
@@ -27,11 +29,11 @@
       padding: 0 24px;
     }
 
-    /* Header / Hero */
+    /* Header / Hero - School Style */
     .hero {
       background: linear-gradient(135deg, #0a2540 0%, #1e4a6e 100%);
       color: white;
-      padding: 48px 0 56px;
+      padding: 56px 0 64px;
       border-bottom: 5px solid #f5a623;
     }
 
@@ -39,7 +41,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 32px;
+      margin-bottom: 40px;
     }
 
     .logo-icon {
@@ -65,7 +67,7 @@
     }
 
     .hero h1 {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       font-weight: 800;
       line-height: 1.2;
       margin-bottom: 16px;
@@ -74,7 +76,7 @@
     .hero p {
       color: #cbd5e1;
       font-size: 1.1rem;
-      max-width: 600px;
+      max-width: 650px;
     }
 
     .school-badge {
@@ -92,6 +94,7 @@
       background: #ffffff;
       padding: 48px 0;
       margin: 0 auto;
+      border-radius: 0;
     }
 
     .section-title {
@@ -201,16 +204,250 @@
       color: #5b6e8c;
     }
 
-    /* Footer */
+    /* Platform Tabs */
+    .platform-showcase {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      margin: 48px 0 32px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .platform-card {
+      text-align: center;
+      padding: 20px 12px;
+      background: #f8fafc;
+      border-radius: 20px;
+      transition: 0.2s;
+      border: 1px solid #eef2f8;
+    }
+    .platform-card i {
+      font-size: 2rem;
+      color: #f5a623;
+      margin-bottom: 12px;
+    }
+    .platform-card h4 {
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .platform-card p {
+      font-size: 0.75rem;
+      color: #5b6e8c;
+    }
+
+    /* Program Tabs */
+    .program-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 32px 0 24px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 40px;
+      transition: 0.2s;
+      color: #475569;
+      font-family: 'Inter', sans-serif;
+    }
+    .tab-btn.active {
+      background: #0a2540;
+      color: white;
+    }
+    .tab-btn:hover:not(.active) {
+      background: #e2e8f0;
+    }
+
+    /* Programs Grid */
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin: 32px 0 48px;
+    }
+    .program-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+      border: 1px solid #eef2f8;
+    }
+    .program-card:hover {
+      transform: translateY(-6px);
+    }
+    .card-header {
+      padding: 24px 24px 16px;
+      background: #ffffff;
+      border-bottom: 3px solid #f5a623;
+    }
+    .card-header h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+    }
+    .card-price {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #0a2540;
+      margin: 12px 0 4px;
+    }
+    .card-price small {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #5b6e8c;
+    }
+    .card-body {
+      padding: 24px;
+    }
+    .session-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+    .session-list li {
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.85rem;
+    }
+    .session-list li i {
+      color: #f5a623;
+      width: 20px;
+    }
+    .platform-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 12px 0;
+    }
+    .platform-tag {
+      background: #eef2ff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #0a2540;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #0a2540;
+      color: #0a2540;
+      width: 100%;
+      padding: 12px;
+      border-radius: 60px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 16px;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-outline:hover {
+      background: #0a2540;
+      color: white;
+    }
+
+    /* Booking Panel */
+    .booking-panel {
+      background: white;
+      border-radius: 32px;
+      margin: 32px 0 48px;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+      border: 1px solid #eef2f8;
+      display: none;
+    }
+    .booking-panel.active {
+      display: block;
+    }
+    .booking-header {
+      padding: 28px 32px 12px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+    .booking-header h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+    .booking-body {
+      padding: 28px 32px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      margin-bottom: 24px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: #334155;
+    }
+    .form-group select, .form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 20px;
+      font-family: 'Inter', sans-serif;
+      background: white;
+    }
+    .flatpickr-input {
+      cursor: pointer;
+    }
+    .price-summary {
+      background: #fef9e6;
+      border-radius: 20px;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 24px 0;
+    }
+    .btn-book {
+      background: #0a2540;
+      color: white;
+      width: 100%;
+      padding: 16px;
+      font-weight: 800;
+      border: none;
+      border-radius: 60px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+    .btn-book:hover {
+      background: #f5a623;
+      color: #0a2540;
+    }
+    .ref-card {
+      background: white;
+      border-radius: 28px;
+      padding: 28px;
+      margin: 32px 0;
+    }
     footer {
       background: #0a2540;
       color: #94a3b8;
       padding: 40px 0;
       text-align: center;
-      margin-top: 48px;
     }
-
-    @media (max-width: 768px) {
+    @media (max-width: 700px) {
+      .form-row { grid-template-columns: 1fr; }
       .hero h1 { font-size: 1.8rem; }
       .slider-btn { width: 36px; height: 36px; font-size: 0.9rem; }
       .slider-btn.prev { left: 8px; }
@@ -225,11 +462,11 @@
   <div class="container">
     <div class="logo">
       <div class="logo-icon">B2B</div>
-      <div class="logo-text">Border2Business <span>Academy</span></div>
+      <div class="logo-text">Border2Business <span>Classes</span></div>
     </div>
-    <div class="school-badge">🎓 OFFICIAL CHINA SOURCING SCHOOL</div>
+    <div class="school-badge">🎓 OFFICIAL CHINA SOURCING TRAININGS CENTRE</div>
     <h1>Master AliExpress, DHgate, Alibaba, 1688, Made-in-China & Global Sources</h1>
-    <p>Live masterclasses · 1:1 coaching · expert mentorship</p>
+    <p>From testing products to bulk containers — learn every platform step by step. Live masterclasses, 1:1 coaching, and expert mentorship.</p>
   </div>
 </div>
 
@@ -253,15 +490,184 @@
   </div>
 </div>
 
+<div class="container">
+  <!-- Platform Showcase -->
+  <div class="platform-showcase">
+    <h3 style="font-size: 1.4rem; font-weight: 800;">📦 All Major Sourcing Platforms Covered</h3>
+    <div class="platform-grid">
+      <div class="platform-card"><i class="fab fa-alipay"></i><h4>AliExpress</h4><p>Beginner · Testing</p></div>
+      <div class="platform-card"><i class="fas fa-store"></i><h4>DHgate</h4><p>Small wholesale · No MOQ</p></div>
+      <div class="platform-card"><i class="fab fa-alibaba"></i><h4>Alibaba</h4><p>Scaling · Private label</p></div>
+      <div class="platform-card"><i class="fas fa-chart-line"></i><h4>1688.com</h4><p>Maximum margins · Bulk</p></div>
+      <div class="platform-card"><i class="fas fa-industry"></i><h4>Made-in-China</h4><p>Industrial · Certified</p></div>
+      <div class="platform-card"><i class="fas fa-globe"></i><h4>Global Sources</h4><p>Premium · Audited</p></div>
+    </div>
+  </div>
+
+  <!-- Program Tabs -->
+  <div class="program-tabs">
+    <button class="tab-btn active" data-program="beginner">📘 Beginner (K30/session)</button>
+    <button class="tab-btn" data-program="intermediate">📙 Intermediate (K60/session)</button>
+    <button class="tab-btn" data-program="advanced">📕 Advanced (K100/session)</button>
+    <button class="tab-btn" data-program="mentorship">👑 Mentorship (K500/month)</button>
+  </div>
+
+  <!-- Beginner Grid -->
+  <div id="beginnerGrid" class="programs-grid">
+    <div class="program-card">
+      <div class="card-header"><h3>📘 Beginner Program</h3><div class="card-price">K30 <small>/ session</small></div></div>
+      <div class="card-body">
+        <div class="platform-tags"><span class="platform-tag">AliExpress</span><span class="platform-tag">DHgate</span><span class="platform-tag">1688</span></div>
+        <ul class="session-list">
+          <li><i class="fas fa-check-circle"></i> B0: 1688 Account Registration & Setup</li>
+          <li><i class="fas fa-check-circle"></i> B1: Find Products on 1688 (Image + Pinyin)</li>
+          <li><i class="fas fa-check-circle"></i> B2: Verify Suppliers – 5 Checks, Red Flags</li>
+          <li><i class="fas fa-check-circle"></i> B3: Landed Cost Calculation (All Platforms)</li>
+          <li><i class="fas fa-check-circle"></i> B4: First Sample Order on 1688</li>
+          <li><i class="fas fa-check-circle"></i> B5: Shipping Options (Sea vs Air to Zambia)</li>
+          <li><i class="fas fa-check-circle"></i> B6: AliExpress Account & First Order</li>
+          <li><i class="fas fa-check-circle"></i> B7: Finding Winning Products on AliExpress</li>
+          <li><i class="fas fa-check-circle"></i> B8: DHgate Basics – Small Wholesale Sourcing</li>
+        </ul>
+        <button class="btn-outline select-program-btn" data-type="beginner">Select Beginner Session →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Intermediate Grid -->
+  <div id="intermediateGrid" class="programs-grid" style="display:none;">
+    <div class="program-card">
+      <div class="card-header"><h3>📙 Intermediate Program</h3><div class="card-price">K60 <small>/ session</small></div></div>
+      <div class="card-body">
+        <div class="platform-tags"><span class="platform-tag">Alibaba</span><span class="platform-tag">DHgate</span><span class="platform-tag">AliExpress</span></div>
+        <ul class="session-list">
+          <li><i class="fas fa-check-circle"></i> I1: Profit Margin Deep Dive (All Platforms)</li>
+          <li><i class="fas fa-check-circle"></i> I2: 1688 Sourcing (Cheaper Suppliers)</li>
+          <li><i class="fas fa-check-circle"></i> I3: Negotiation Scripts for Suppliers</li>
+          <li><i class="fas fa-check-circle"></i> I4: Freight & Customs Clearance (Zambia)</li>
+          <li><i class="fas fa-check-circle"></i> I5: Order Consolidation (Multiple Platforms)</li>
+          <li><i class="fas fa-check-circle"></i> I6: Alibaba Account & Supplier Sourcing</li>
+          <li><i class="fas fa-check-circle"></i> I7: Private Labeling on Alibaba (Logo, Packaging, OEM)</li>
+          <li><i class="fas fa-check-circle"></i> I8: Negotiating MOQs & Payment Terms on Alibaba</li>
+          <li><i class="fas fa-check-circle"></i> I9: DHgate vs AliExpress vs Alibaba – Platform Comparison</li>
+        </ul>
+        <button class="btn-outline select-program-btn" data-type="intermediate">Select Intermediate Session →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Advanced Grid -->
+  <div id="advancedGrid" class="programs-grid" style="display:none;">
+    <div class="program-card">
+      <div class="card-header"><h3>📕 Advanced Program</h3><div class="card-price">K100 <small>/ session</small></div></div>
+      <div class="card-body">
+        <div class="platform-tags"><span class="platform-tag">1688</span><span class="platform-tag">Made-in-China</span><span class="platform-tag">Global Sources</span></div>
+        <ul class="session-list">
+          <li><i class="fas fa-check-circle"></i> A1: Container Shipping Strategy</li>
+          <li><i class="fas fa-check-circle"></i> A2: Private Labeling (Your Brand – Any Platform)</li>
+          <li><i class="fas fa-check-circle"></i> A3: Supplier Relationship Management</li>
+          <li><i class="fas fa-check-circle"></i> A4: Quality Control Inspections (China)</li>
+          <li><i class="fas fa-check-circle"></i> A5: 1688 Sourcing with Agents</li>
+          <li><i class="fas fa-check-circle"></i> A6: 1688 vs Alibaba – True Cost Comparison</li>
+          <li><i class="fas fa-check-circle"></i> A7: Made-in-China for Industrial Products</li>
+          <li><i class="fas fa-check-circle"></i> A8: Global Sources for Premium Sourcing</li>
+          <li><i class="fas fa-check-circle"></i> A9: Verifying Factory Certifications & Audits</li>
+        </ul>
+        <button class="btn-outline select-program-btn" data-type="advanced">Select Advanced Session →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mentorship Grid -->
+  <div id="mentorshipGrid" class="programs-grid" style="display:none;">
+    <div class="program-card">
+      <div class="card-header"><h3>👑 Expert Mentorship</h3><div class="card-price">K500 <small>/ month</small></div></div>
+      <div class="card-body">
+        <div class="platform-tags"><span class="platform-tag">All Platforms</span><span class="platform-tag">Full Support</span></div>
+        <ul class="session-list">
+          <li><i class="fas fa-crown"></i> 4 one-on-one sessions (any level, any platform)</li>
+          <li><i class="fas fa-crown"></i> 4 Friday Masterclasses included</li>
+          <li><i class="fas fa-crown"></i> Direct WhatsApp support (reply within 12 hours)</li>
+          <li><i class="fas fa-crown"></i> Priority booking + Personal action plan</li>
+          <li><i class="fas fa-crown"></i> Platform audit: Which platform fits your product?</li>
+          <li><i class="fas fa-crown"></i> Save K120+ vs à la carte</li>
+        </ul>
+        <button class="btn-outline select-program-btn" data-type="mentorship">Apply for Mentorship →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Panel -->
+  <div id="bookingPanel" class="booking-panel">
+    <div class="booking-header">
+      <h2 id="bookingTitle">📌 Complete your booking</h2>
+    </div>
+    <div class="booking-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>👤 Full name</label>
+          <input type="text" id="customerName" placeholder="e.g., Mary Phiri">
+        </div>
+        <div class="form-group">
+          <label>📱 WhatsApp number</label>
+          <input type="tel" id="customerPhone" placeholder="+260 97XXXXXXX">
+        </div>
+      </div>
+      <div class="form-group" id="sessionDropdownGroup">
+        <label>📋 Select session</label>
+        <select id="sessionSelect"></select>
+      </div>
+      <div class="form-group">
+        <label>🗓️ Preferred date & time</label>
+        <input type="text" id="eventDate" placeholder="Select date and time" class="flatpickr-datetime">
+      </div>
+      <div class="price-summary">
+        <span>Total amount</span>
+        <span class="price-amount" id="totalAmountDisplay">K0</span>
+      </div>
+      <button class="btn-book" id="finalBookBtn">Continue to payment →</button>
+      <p style="font-size:0.75rem; text-align:center; margin-top:16px;">You'll be redirected to deposit.html to complete payment securely.</p>
+    </div>
+  </div>
+
+  <!-- Platform Comparison Reference -->
+  <div class="ref-card">
+    <h3>📊 Platform Comparison – Which One Do You Need?</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; margin-top: 20px;">
+      <div><strong>🟢 AliExpress</strong><br>Best for: Testing products, beginners, orders of 1-50 pieces<br>✅ No MOQ, buyer protection, English interface</div>
+      <div><strong>🟢 DHgate</strong><br>Best for: Small wholesale, product testing, orders of 10-500 pieces<br>✅ Low MOQs, global shipping</div>
+      <div><strong>🟡 Alibaba</strong><br>Best for: Scaling, private label, orders of 100-10,000+ pieces<br>✅ Trade Assurance, flexible MOQs</div>
+      <div><strong>🟠 1688.com</strong><br>Best for: Maximum margins, experienced importers, 500+ pieces<br>⚠️ Needs agent, Chinese interface</div>
+      <div><strong>🔵 Made-in-China</strong><br>Best for: Industrial products, certified factories<br>✅ Supplier verification, export-ready</div>
+      <div><strong>🔵 Global Sources</strong><br>Best for: Premium quality, audited suppliers<br>✅ Rigorous factory audits, trade shows</div>
+    </div>
+  </div>
+
+  <div style="background:#fef9e6; border-radius:28px; padding:32px; text-align:center; margin:32px 0;">
+    <i class="fas fa-shield-alt" style="color:#f5a623; font-size:2rem;"></i>
+    <h3 style="margin-top:8px;">100% risk-free coaching</h3>
+    <p>If you don't learn something valuable in your first session, we'll refund you. No questions.</p>
+  </div>
+</div>
+
 <footer>
   <div class="container">
     <p>© 2026 Border2Business Academy — Zambia's #1 China Sourcing Training School</p>
-    <p style="margin-top: 6px;">📍 Ndola / Lusaka · WhatsApp +260 97XXXXXXX</p>
+    <p style="margin-top:6px;">📍 Ndola / Lusaka · WhatsApp +260 97XXXXXXX</p>
   </div>
 </footer>
 
 <script>
-  // Array of slide image URLs
+  // Flatpickr initialization
+  flatpickr(".flatpickr-datetime", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    minDate: "today",
+    time_24hr: true,
+    allowInput: true
+  });
+
+  // Array of slide image URLs (as provided)
   const slideImages = [
     "b8454ee4-81da-4a8f-857a-84f4f5e1e7d2.png",
     "dc9a3e82-a318-4082-8719-c07759520006.png",
@@ -285,7 +691,6 @@
   let currentIndex = 0;
   let slidesCount = slideImages.length;
 
-  // DOM elements
   const sliderWrapper = document.getElementById('sliderWrapper');
   const dotsContainer = document.getElementById('dotsContainer');
   const slideCounter = document.getElementById('slideCounter');
@@ -324,18 +729,15 @@
     const slideWidth = sliderWrapper.parentElement.clientWidth;
     sliderWrapper.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
     
-    // Update dots
     const dots = document.querySelectorAll('.dot');
     dots.forEach((dot, idx) => {
       if (idx === currentIndex) dot.classList.add('active');
       else dot.classList.remove('active');
     });
     
-    // Update counter
     slideCounter.textContent = `Slide ${currentIndex + 1} of ${slidesCount}`;
   }
 
-  // Go to specific slide
   function goToSlide(index) {
     if (index < 0) index = 0;
     if (index >= slidesCount) index = slidesCount - 1;
@@ -343,32 +745,28 @@
     updateSlider();
   }
 
-  // Next slide
   function nextSlide() {
     if (currentIndex + 1 < slidesCount) {
       currentIndex++;
     } else {
-      currentIndex = 0; // Loop back to first
+      currentIndex = 0;
     }
     updateSlider();
   }
 
-  // Previous slide
   function prevSlide() {
     if (currentIndex - 1 >= 0) {
       currentIndex--;
     } else {
-      currentIndex = slidesCount - 1; // Loop to last
+      currentIndex = slidesCount - 1;
     }
     updateSlider();
   }
 
-  // Handle window resize
   function handleResize() {
     updateSlider();
   }
 
-  // Auto-slide every 5 seconds (optional)
   let autoSlideInterval;
   function startAutoSlide() {
     autoSlideInterval = setInterval(() => {
@@ -380,13 +778,11 @@
     if (autoSlideInterval) clearInterval(autoSlideInterval);
   }
 
-  // Initialize
-  function init() {
+  function initSlider() {
     buildSlides();
     buildDots();
     updateSlider();
     
-    // Event listeners
     prevBtn.addEventListener('click', () => {
       stopAutoSlide();
       prevSlide();
@@ -405,17 +801,167 @@
       startAutoSlide();
     });
     
-    // Start auto-slide
-    startAutoSlide();
-    
-    // Pause auto-slide on hover
     const sliderContainer = document.querySelector('.slider-container');
     sliderContainer.addEventListener('mouseenter', stopAutoSlide);
     sliderContainer.addEventListener('mouseleave', startAutoSlide);
+    
+    startAutoSlide();
   }
 
-  // Run when page loads
-  init();
+  // Initialize slider when page loads
+  initSlider();
+
+  // ========== EXISTING COACHING SESSION CODE ==========
+  const sessionData = {
+    beginner: {
+      name: "Beginner Program",
+      sessions: [
+        { code: "B0", name: "B0: 1688 Account Registration & Setup", price: 30, platform: "1688" },
+        { code: "B1", name: "B1: Find Products on 1688 (Image + Pinyin)", price: 30, platform: "1688" },
+        { code: "B2", name: "B2: Verify Suppliers – 5 Checks, Red Flags", price: 30, platform: "1688" },
+        { code: "B3", name: "B3: Landed Cost Calculation (All Platforms)", price: 30, platform: "All" },
+        { code: "B4", name: "B4: First Sample Order on 1688", price: 30, platform: "1688" },
+        { code: "B5", name: "B5: Shipping Options (Sea vs Air to Zambia)", price: 30, platform: "All" },
+        { code: "B6", name: "B6: AliExpress Account & First Order", price: 30, platform: "AliExpress" },
+        { code: "B7", name: "B7: Finding Winning Products on AliExpress", price: 30, platform: "AliExpress" },
+        { code: "B8", name: "B8: DHgate Basics – Small Wholesale Sourcing", price: 30, platform: "DHgate" }
+      ]
+    },
+    intermediate: {
+      name: "Intermediate Program",
+      sessions: [
+        { code: "I1", name: "I1: Profit Margin Deep Dive (All Platforms)", price: 60, platform: "All" },
+        { code: "I2", name: "I2: 1688 Sourcing (Cheaper Suppliers)", price: 60, platform: "1688" },
+        { code: "I3", name: "I3: Negotiation Scripts for Suppliers", price: 60, platform: "All" },
+        { code: "I4", name: "I4: Freight & Customs Clearance (Zambia)", price: 60, platform: "All" },
+        { code: "I5", name: "I5: Order Consolidation (Multiple Platforms)", price: 60, platform: "All" },
+        { code: "I6", name: "I6: Alibaba Account & Supplier Sourcing", price: 60, platform: "Alibaba" },
+        { code: "I7", name: "I7: Private Labeling on Alibaba (Logo, Packaging, OEM)", price: 60, platform: "Alibaba" },
+        { code: "I8", name: "I8: Negotiating MOQs & Payment Terms on Alibaba", price: 60, platform: "Alibaba" },
+        { code: "I9", name: "I9: DHgate vs AliExpress vs Alibaba – Platform Comparison", price: 60, platform: "All" }
+      ]
+    },
+    advanced: {
+      name: "Advanced Program",
+      sessions: [
+        { code: "A1", name: "A1: Container Shipping Strategy", price: 100, platform: "All" },
+        { code: "A2", name: "A2: Private Labeling (Your Brand – Any Platform)", price: 100, platform: "All" },
+        { code: "A3", name: "A3: Supplier Relationship Management", price: 100, platform: "All" },
+        { code: "A4", name: "A4: Quality Control Inspections (China)", price: 100, platform: "All" },
+        { code: "A5", name: "A5: 1688 Sourcing with Agents", price: 100, platform: "1688" },
+        { code: "A6", name: "A6: 1688 vs Alibaba – True Cost Comparison", price: 100, platform: "1688/Alibaba" },
+        { code: "A7", name: "A7: Made-in-China for Industrial Products", price: 100, platform: "Made-in-China" },
+        { code: "A8", name: "A8: Global Sources for Premium Sourcing", price: 100, platform: "Global Sources" },
+        { code: "A9", name: "A9: Verifying Factory Certifications & Audits", price: 100, platform: "Made-in-China/Global Sources" }
+      ]
+    },
+    mentorship: {
+      name: "Expert Mentorship",
+      sessions: [
+        { code: "MENTOR", name: "Monthly Mentorship (All Platforms, 4 sessions + masterclasses + support)", price: 500, platform: "All" }
+      ]
+    }
+  };
+
+  let currentProgram = "beginner";
+  let currentPrice = 30;
+
+  const beginnerGrid = document.getElementById('beginnerGrid');
+  const intermediateGrid = document.getElementById('intermediateGrid');
+  const advancedGrid = document.getElementById('advancedGrid');
+  const mentorshipGrid = document.getElementById('mentorshipGrid');
+  const bookingPanel = document.getElementById('bookingPanel');
+  const sessionSelect = document.getElementById('sessionSelect');
+  const totalAmountSpan = document.getElementById('totalAmountDisplay');
+  const bookingTitle = document.getElementById('bookingTitle');
+  const customerNameInput = document.getElementById('customerName');
+  const customerPhoneInput = document.getElementById('customerPhone');
+  const eventDateInput = document.getElementById('eventDate');
+  const finalBookBtn = document.getElementById('finalBookBtn');
+
+  function switchProgram(program) {
+    currentProgram = program;
+    beginnerGrid.style.display = 'none';
+    intermediateGrid.style.display = 'none';
+    advancedGrid.style.display = 'none';
+    mentorshipGrid.style.display = 'none';
+    if (program === 'beginner') beginnerGrid.style.display = 'grid';
+    else if (program === 'intermediate') intermediateGrid.style.display = 'grid';
+    else if (program === 'advanced') advancedGrid.style.display = 'grid';
+    else if (program === 'mentorship') mentorshipGrid.style.display = 'grid';
+    
+    document.querySelectorAll('.tab-btn').forEach(tab => {
+      if (tab.getAttribute('data-program') === program) tab.classList.add('active');
+      else tab.classList.remove('active');
+    });
+    bookingPanel.classList.remove('active');
+  }
+
+  document.querySelectorAll('.tab-btn').forEach(tab => {
+    tab.addEventListener('click', () => switchProgram(tab.getAttribute('data-program')));
+  });
+
+  document.querySelectorAll('.select-program-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const programType = btn.getAttribute('data-type');
+      currentProgram = programType;
+      switchProgram(programType);
+      
+      const data = sessionData[programType];
+      bookingTitle.innerText = `📌 ${data.name} - Select a session`;
+      sessionSelect.innerHTML = '';
+      data.sessions.forEach(sess => {
+        const option = document.createElement('option');
+        option.value = `${sess.code}|${sess.price}|${sess.platform}`;
+        option.textContent = `${sess.name} (${sess.platform}) – K${sess.price}`;
+        sessionSelect.appendChild(option);
+      });
+      currentPrice = data.sessions[0].price;
+      totalAmountSpan.innerText = `K${currentPrice}`;
+      bookingPanel.classList.add('active');
+    });
+  });
+
+  sessionSelect.addEventListener('change', () => {
+    const selectedVal = sessionSelect.value;
+    if (selectedVal) {
+      const pricePart = selectedVal.split('|')[1];
+      currentPrice = parseInt(pricePart) || 0;
+      totalAmountSpan.innerText = `K${currentPrice}`;
+    }
+  });
+
+  finalBookBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const name = customerNameInput.value.trim();
+    const phone = customerPhoneInput.value.trim();
+    const selectedDate = eventDateInput.value;
+    const selectedOption = sessionSelect.options[sessionSelect.selectedIndex];
+    
+    if (!name) { alert('Please enter your full name.'); return; }
+    if (!phone) { alert('Please enter your WhatsApp number.'); return; }
+    if (!selectedDate) { alert('Please select a preferred date & time.'); return; }
+    
+    let itemName = '', sessionCode = '', platform = '';
+    if (selectedOption) {
+      itemName = selectedOption.text;
+      const parts = selectedOption.value.split('|');
+      sessionCode = parts[0];
+      platform = parts[2] || 'General';
+    }
+    
+    const params = new URLSearchParams();
+    params.append('item', itemName);
+    params.append('amount', currentPrice);
+    params.append('name', name);
+    params.append('phone', phone);
+    params.append('program_type', currentProgram);
+    params.append('preferred_date', selectedDate);
+    params.append('session_code', sessionCode);
+    params.append('platform', platform);
+    
+    window.location.href = `wallet.html?${params.toString()}`;
+  });
 </script>
 </body>
-</html>
+  </html>
