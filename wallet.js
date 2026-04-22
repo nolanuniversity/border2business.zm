@@ -207,3 +207,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
   console.log("✅ All event listeners attached");
 });
+const sendWhatsAppBtn = document.getElementById("sendWhatsAppBtn");
+
+sendWhatsAppBtn.onclick = function () {
+
+  const senderNumber = senderNumberInput.value.trim();
+  const amount = currentDepositAmount;
+  const provider = selectedProvider || "Not selected";
+  const txId = transactionIdInput.value.trim();
+
+  if (!amount || amount <= 0) {
+    alert("Enter deposit amount first");
+    return;
+  }
+
+  // WhatsApp message
+  const message =
+`Hello, I have made a deposit:
+
+💰 Amount: ZMK ${amount}
+📱 Provider: ${provider}
+📞 Sender Number: ${senderNumber || "Not provided"}
+🧾 Transaction ID: ${txId || "Not provided"}
+
+Please find attached proof of payment.`;
+
+  // Your WhatsApp number (CHANGE THIS)
+  const yourWhatsAppNumber = "260771196634";
+
+  // Create WhatsApp link
+  const url = `https://wa.me/${yourWhatsAppNumber}?text=${encodeURIComponent(message)}`;
+
+  // Open WhatsApp
+  window.open(url, "_blank");
+};
