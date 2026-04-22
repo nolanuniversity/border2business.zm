@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 Please send us your proof of payment (screenshot or receipt) here.`;
 
-      const yourWhatsAppNumber = "260771196634"; // 🔴 YOUR NUMBER
+      const yourWhatsAppNumber = "+260 963612941"; // 🔴 YOUR NUMBER
 
       const url = `https://wa.me/${yourWhatsAppNumber}?text=${encodeURIComponent(message)}`;
 
