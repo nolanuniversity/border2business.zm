@@ -91,12 +91,8 @@ button {
 }
 
 .btn-primary {
-  background: linear-gradient(
-    135deg,
-    var(--tzf-green-light),
-    var(--tzf-green-main)
-  );
-  color: var(--tzf-white);
+  background: linear-gradient(135deg, #1aa08a, #0f6f61);
+  color: white;
 }
 
 /* PROVIDERS */
@@ -116,7 +112,7 @@ button {
   color: #1f1f1f;
 }
 
-/* UTILITIES */
+/* UTIL */
 .hidden {
   display: none;
 }
@@ -132,15 +128,15 @@ button {
   color: var(--tzf-text-muted);
 }
 
-/* DEPOSIT BUTTON STYLE */
+/* WhatsApp button */
 .deposit-btn {
   display: block;
   width: 100%;
   text-align: center;
   padding: 14px;
   margin-top: 15px;
-  background: linear-gradient(135deg, #1dd88a, #0fb36a);
-  color: #003820;
+  background: #25D366;
+  color: white;
   font-weight: bold;
   text-decoration: none;
   border-radius: 14px;
@@ -152,86 +148,88 @@ button {
 
 <body>
 
-  <div class="wallet-container">
+<div class="wallet-container">
 
-    <h2>Wallet</h2>
-    <div class="subtext">
-      Make deposits for your needs: Masterclass, One-on-one coaching sessions & expertise mentorship
-    </div>
+  <h2>Wallet</h2>
+  <div class="subtext">
+    Make deposits for your needs: Masterclass, coaching & mentorship
+  </div>
 
-    <!-- BALANCES -->
-    <div class="card">
-      <h3>Deposit Wallet</h3>
-      <div class="amount" id="depositBalance">ZMK 0.00</div>
-    </div>
+  <!-- BALANCES -->
+  <div class="card">
+    <h3>Deposit Wallet</h3>
+    <div class="amount" id="depositBalance">ZMK 0.00</div>
+  </div>
 
-    <div class="card">
-      <h3>Referral Bonuses</h3>
-      <div class="amount" id="referralBalance">ZMK 0.00</div>
-    </div>
+  <div class="card">
+    <h3>Referral Bonuses</h3>
+    <div class="amount" id="referralBalance">ZMK 0.00</div>
+  </div>
 
-    <!-- DEPOSIT FORM -->
-    <div class="card">
-      <h3>Deposit Cash</h3>
+  <!-- DEPOSIT FORM -->
+  <div class="card">
+    <h3>Deposit Cash</h3>
 
-      <input type="number" id="depositAmount" placeholder="Enter amount in ZMK"/>
+    <input type="number" id="depositAmount" placeholder="Enter amount in ZMK"/>
 
-      <button class="btn-primary" id="chooseProviderBtn">
-        Continue
-      </button>
-
-      <!-- PROVIDER SECTION -->
-      <div id="providerSection" class="hidden center">
-        <p><strong>Select your Mobile Wallet Provider:</strong></p>
-
-        <div class="provider-buttons">
-          <button class="btn-airtel" id="airtelBtn">Airtel Money</button>
-          <button class="btn-mtn" id="mtnBtn">MTN Mobile Money</button>
-        </div>
-      </div>
-
-      <!-- PAYMENT DETAILS -->
-      <div id="paymentDetails" class="hidden">
-        <h4 id="selectedProviderTitle"></h4>
-
-        <p><strong>Send Payment To:</strong></p>
-        <p id="payToNumber"></p>
-
-        <p><strong>Amount:</strong></p>
-        <p id="payAmount"></p>
-
-        <input type="text" id="senderNumber" placeholder="Enter your mobile number"/>
-        <input type="text" id="transactionId" placeholder="Enter Transaction ID / Reference"/>
-
-        <button class="btn-primary" id="confirmDepositBtn">
-          Confirm Deposit
-        </button>
-      </div>
-    </div>
-
-    <!-- ✅ REPLACED BUTTON -->
-    <button id="sendWhatsAppBtn" class="deposit-btn" style="display:none; background:#25D366; color:white;">
-      💬 Send Proof on WhatsApp
+    <button class="btn-primary" id="chooseProviderBtn">
+      Continue
     </button>
 
-    <!-- ACTIVE DEPOSITS -->
-    <div class="card">
-      <h3>Active Deposits</h3>
-      <div id="activeDepositsList">
-        <p class="subtext">No active deposits yet</p>
+    <!-- PROVIDER -->
+    <div id="providerSection" class="hidden center">
+      <p><strong>Select Provider</strong></p>
+
+      <div class="provider-buttons">
+        <button class="btn-airtel" id="airtelBtn">Airtel Money</button>
+        <button class="btn-mtn" id="mtnBtn">MTN Mobile Money</button>
       </div>
     </div>
 
-    <!-- TRANSACTION HISTORY -->
-    <div class="card">
-      <h3>Transaction History</h3>
-      <div id="transactionHistoryList">
-        <p class="subtext">No transactions yet</p>
-      </div>
+    <!-- PAYMENT DETAILS -->
+    <div id="paymentDetails" class="hidden">
+      <h4 id="selectedProviderTitle"></h4>
+
+      <p><strong>Send To:</strong></p>
+      <p id="payToNumber"></p>
+
+      <p><strong>Amount:</strong></p>
+      <p id="payAmount"></p>
+
+      <input type="text" id="senderNumber" placeholder="Your Number"/>
+      <input type="text" id="transactionId" placeholder="Transaction ID"/>
+
+      <button class="btn-primary" id="confirmDepositBtn">
+        Confirm Deposit
+      </button>
     </div>
 
   </div>
 
-  <script type="module" src="wallet.js"></script>
+  <!-- ACTIVE DEPOSITS -->
+  <div class="card">
+    <h3>Active Deposits</h3>
+    <div id="activeDepositsList">
+      <p class="subtext">No active deposits yet</p>
+    </div>
+  </div>
+
+  <!-- TRANSACTION HISTORY -->
+  <div class="card">
+    <h3>Transaction History</h3>
+    <div id="transactionHistoryList">
+      <p class="subtext">No transactions yet</p>
+    </div>
+  </div>
+
+  <!-- ✅ WHATSAPP BUTTON (NOW CORRECT POSITION) -->
+  <button id="sendWhatsAppBtn" class="deposit-btn" style="display:none;">
+    💬 Send Proof on WhatsApp
+  </button>
+
+</div>
+
+<script type="module" src="wallet.js"></script>
+
 </body>
 </html>
