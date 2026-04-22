@@ -212,32 +212,37 @@ const sendWhatsAppBtn = document.getElementById("sendWhatsAppBtn");
 sendWhatsAppBtn.onclick = function () {
 
   const senderNumber = senderNumberInput.value.trim();
-  const amount = currentDepositAmount;
-  const provider = selectedProvider || "Not selected";
   const txId = transactionIdInput.value.trim();
 
-  if (!amount || amount <= 0) {
+  if (!currentDepositAmount || currentDepositAmount <= 0) {
     alert("Enter deposit amount first");
     return;
   }
 
-  // WhatsApp message
+  if (!selectedProvider) {
+    alert("Select payment provider first");
+    return;
+  }
+
+  if (!txId) {
+    alert("Enter Transaction ID first");
+    return;
+  }
+
   const message =
-`Hello, I have made a deposit:
+`🧾 DEPOSIT PROOF SUBMISSION
 
-💰 Amount: ZMK ${amount}
-📱 Provider: ${provider}
-📞 Sender Number: ${senderNumber || "Not provided"}
-🧾 Transaction ID: ${txId || "Not provided"}
+💰 Amount: ZMK ${currentDepositAmount}
+🏦 Provider: ${selectedProvider}
+📱 Sender Number: ${senderNumber || "Not provided"}
+🔖 Transaction ID: ${txId}
 
-Please find attached proof of payment.`;
+⚠️ Please verify my deposit. I have attached proof of payment.`;
 
-  // Your WhatsApp number (CHANGE THIS)
-  const yourWhatsAppNumber = "260771196634";
+  const yourWhatsAppNumber = "260771196634"; // 🔴 replace with your number
 
-  // Create WhatsApp link
   const url = `https://wa.me/${yourWhatsAppNumber}?text=${encodeURIComponent(message)}`;
 
-  // Open WhatsApp
   window.open(url, "_blank");
 };
+
