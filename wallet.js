@@ -1,5 +1,5 @@
 /* =========================
-   WALLET JS (MODULE VERSION)
+   WALLET JS (NO FIREBASE)
 ========================= */
 
 // SIMPLE USER ID
@@ -14,12 +14,13 @@ function getUserId() {
 
 const currentUserId = getUserId();
 
-// State
+// STATE
 let currentDepositAmount = 0;
 let selectedProvider = "";
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("✅ Wallet Module Loaded");
+
+  console.log("✅ Wallet Loaded (No Firebase)");
 
   /* =========================
      ELEMENTS
@@ -44,38 +45,38 @@ document.addEventListener("DOMContentLoaded", function () {
   const depositBalanceEl = document.getElementById("depositBalance");
   const referralBalanceEl = document.getElementById("referralBalance");
 
-  // Check if critical elements exist
-  if (!chooseProviderBtn || !providerSection || !depositAmountInput) {
-    console.error("❌ Required elements not found!");
+  if (!chooseProviderBtn || !depositAmountInput || !providerSection) {
+    console.error("❌ Missing required elements");
     return;
   }
 
   /* =========================
-     LOAD BALANCES FROM LOCALSTORAGE
+     LOAD BALANCES
   ========================= */
   function loadBalances() {
     const depositBalance = parseFloat(localStorage.getItem("depositBalance") || "0");
     const referralBalance = parseFloat(localStorage.getItem("referralBalance") || "0");
-    
+
     if (depositBalanceEl) {
       depositBalanceEl.textContent = "ZMK " + depositBalance.toFixed(2);
     }
+
     if (referralBalanceEl) {
       referralBalanceEl.textContent = "ZMK " + referralBalance.toFixed(2);
     }
   }
 
   /* =========================
-     LOAD DEPOSITS FROM LOCALSTORAGE
+     LOAD DEPOSITS
   ========================= */
   function loadDeposits() {
     if (!activeDepositsList) return;
-    
+
     const deposits = JSON.parse(localStorage.getItem("deposits") || "[]");
     const userDeposits = deposits.filter(d => d.uid === currentUserId);
-    
+
     activeDepositsList.innerHTML = "";
-    
+
     if (userDeposits.length === 0) {
       activeDepositsList.innerHTML = '<p class="subtext">No active deposits yet</p>';
       return;
@@ -84,57 +85,49 @@ document.addEventListener("DOMContentLoaded", function () {
     userDeposits.reverse().forEach(d => {
       const div = document.createElement("div");
       div.className = "list-item";
-      div.textContent = `${d.provider || 'Unknown'} - ZMK ${d.amount} - ${d.status || 'pending'}`;
+      div.textContent = `${d.provider} - ZMK ${d.amount} - ${d.status}`;
       activeDepositsList.appendChild(div);
     });
   }
 
   /* =========================
-     SHOW PAYMENT FUNCTION
+     SHOW PAYMENT
   ========================= */
   function showPayment(provider) {
     selectedProvider = provider;
 
-    if (selectedProviderTitle) {
-      selectedProviderTitle.textContent = provider;
-    }
-    if (payAmount) {
-      payAmount.textContent = "ZMK " + currentDepositAmount.toFixed(2);
-    }
-    if (payToNumber) {
-      payToNumber.textContent = provider === "Airtel Money"
-        ? "Send to: 097 5914001 (Lewis Mwaba)"
-        : "Send to: 0768526191 (Lewis Mwaba)";
-    }
+    selectedProviderTitle.textContent = provider;
+    payAmount.textContent = "ZMK " + currentDepositAmount.toFixed(2);
 
-    if (paymentDetails) {
-      paymentDetails.classList.remove("hidden");
-    }
+    payToNumber.textContent =
+      provider === "Airtel Money"
+        ? "Send to: 0975914001 (Lewis Mwaba)"
+        : "Send to: 0768526191 (Lewis Mwaba)";
+
+    paymentDetails.classList.remove("hidden");
   }
 
   /* =========================
-     RESET FLOW
+     RESET
   ========================= */
   function resetFlow() {
-    if (depositAmountInput) depositAmountInput.value = "";
-    if (senderNumberInput) senderNumberInput.value = "";
-    if (transactionIdInput) transactionIdInput.value = "";
+    depositAmountInput.value = "";
+    senderNumberInput.value = "";
+    transactionIdInput.value = "";
 
-    if (providerSection) providerSection.classList.add("hidden");
-    if (paymentDetails) paymentDetails.classList.add("hidden");
+    providerSection.classList.add("hidden");
+    paymentDetails.classList.add("hidden");
 
-    if (chooseProviderBtn) chooseProviderBtn.classList.remove("hidden");
     chooseProviderBtn.style.display = "block";
   }
 
   /* =========================
-     EVENT LISTENERS
+     EVENTS
   ========================= */
 
-  // CONTINUE BUTTON
+  // CONTINUE
   chooseProviderBtn.addEventListener("click", function (e) {
     e.preventDefault();
-    console.log("🔥 Continue clicked");
 
     const amount = parseFloat(depositAmountInput.value);
 
@@ -148,41 +141,33 @@ document.addEventListener("DOMContentLoaded", function () {
     chooseProviderBtn.style.display = "none";
   });
 
-  // PROVIDER BUTTONS
-  if (airtelBtn) {
-    airtelBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      showPayment("Airtel Money");
-    });
-  }
+  // PROVIDERS
+  airtelBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    showPayment("Airtel Money");
+  });
 
-  if (mtnBtn) {
-    mtnBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      showPayment("MTN Mobile Money");
-    });
-  }
+  mtnBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    showPayment("MTN Mobile Money");
+  });
 
-  // CONFIRM DEPOSIT BUTTON
-if (confirmDepositBtn) {
-  confirmDepositBtn.addEventListener("click", async function (e) {
+  /* =========================
+     CONFIRM + WHATSAPP
+  ========================= */
+  confirmDepositBtn?.addEventListener("click", function (e) {
     e.preventDefault();
 
-    const senderNumber = senderNumberInput?.value.trim() || "";
-    const txId = transactionIdInput?.value.trim() || "";
+    const senderNumber = senderNumberInput.value.trim();
+    const txId = transactionIdInput.value.trim();
 
     if (!senderNumber || !txId) {
       alert("Fill all fields");
       return;
     }
 
-    if (!currentDepositAmount || currentDepositAmount <= 0) {
-      alert("Enter deposit amount first");
-      return;
-    }
-
-    if (!selectedProvider) {
-      alert("Select provider first");
+    if (!currentDepositAmount || !selectedProvider) {
+      alert("Complete deposit steps first");
       return;
     }
 
@@ -199,14 +184,10 @@ if (confirmDepositBtn) {
     };
 
     try {
-      // ✅ SAVE TO FIREBASE
-      await set(ref(db, `users/${currentUserId}/deposits/${depositId}`), data);
-      await set(ref(db, `depositRequests/${depositId}`), data);
-
-      await push(ref(db, `notifications/${currentUserId}`), {
-        message: "Deposit submitted",
-        time: Date.now()
-      });
+      // ✅ SAVE LOCALLY
+      const deposits = JSON.parse(localStorage.getItem("deposits") || "[]");
+      deposits.push(data);
+      localStorage.setItem("deposits", JSON.stringify(deposits));
 
       // ✅ WHATSAPP MESSAGE
       const message =
@@ -220,22 +201,27 @@ if (confirmDepositBtn) {
 
 Please send us your proof of payment (screenshot or receipt) here.`;
 
-      const yourWhatsAppNumber = "260771196634"; // 🔴 PUT YOUR NUMBER
+      const yourWhatsAppNumber = "260771196634"; // 🔴 YOUR NUMBER
 
       const url = `https://wa.me/${yourWhatsAppNumber}?text=${encodeURIComponent(message)}`;
 
-      // ✅ OPEN WHATSAPP
       window.open(url, "_blank");
 
       alert("Deposit saved. Continue on WhatsApp ✅");
 
       resetFlow();
+      loadDeposits();
 
     } catch (err) {
       console.error(err);
       alert("Error saving deposit");
     }
   });
-                }
-   
-   
+
+  /* =========================
+     INIT
+  ========================= */
+  loadBalances();
+  loadDeposits();
+
+});
